@@ -1,0 +1,16 @@
+services:
+  poller:
+    build: .
+    container_name: ttc-poller
+    restart: unless-stopped
+    environment:
+      DATA_DIR: /app/data
+      POLL_SECONDS: "30"
+      FLUSH_SECONDS: "300"
+    volumes:
+      - ./data:/app/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
